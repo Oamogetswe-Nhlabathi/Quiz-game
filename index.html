@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quiz Game - Test Your Knowledge</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <!-- Home Screen -->
+        <div id="homeScreen" class="screen active">
+            <div class="content">
+                <h1>🎮 Quiz Game</h1>
+                <p>Test your knowledge and climb the leaderboard!</p>
+                
+                <div class="difficulty-selector">
+                    <h2>Select Difficulty Level</h2>
+                    <button class="btn btn-difficulty" onclick="startQuiz('easy')">
+                        🟢 Easy
+                        <span class="info">10 seconds per question</span>
+                    </button>
+                    <button class="btn btn-difficulty" onclick="startQuiz('medium')">
+                        🟡 Medium
+                        <span class="info">7 seconds per question</span>
+                    </button>
+                    <button class="btn btn-difficulty" onclick="startQuiz('hard')">
+                        🔴 Hard
+                        <span class="info">5 seconds per question</span>
+                    </button>
+                </div>
+
+                <button class="btn btn-leaderboard" onclick="showLeaderboard()">
+                    🏆 View Leaderboard
+                </button>
+            </div>
+        </div>
+
+        <!-- Quiz Screen -->
+        <div id="quizScreen" class="screen">
+            <div class="quiz-header">
+                <div class="progress">
+                    <span id="questionNumber">1</span> / <span id="totalQuestions">10</span>
+                </div>
+                <div class="score-box">
+                    Score: <span id="currentScore">0</span>
+                </div>
+                <div class="timer" id="timer">10s</div>
+            </div>
+
+            <div class="quiz-content">
+                <h2 id="questionText" class="question"></h2>
+
+                <!-- Multiple Choice Answers -->
+                <div id="multipleChoice" class="answers-container">
+                    <!-- Generated dynamically -->
+                </div>
+
+                <!-- True/False Buttons -->
+                <div id="trueFalse" class="answers-container" style="display: none;">
+                    <button class="btn btn-answer" onclick="answerQuestion(true)">✓ True</button>
+                    <button class="btn btn-answer" onclick="answerQuestion(false)">✗ False</button>
+                </div>
+
+                <!-- Text Input -->
+                <div id="textInput" class="answers-container" style="display: none;">
+                    <input type="text" id="textAnswer" placeholder="Type your answer..." onkeypress="handleTextInputKeypress(event)">
+                    <button class="btn" onclick="submitTextAnswer()">Submit Answer</button>
+                </div>
+
+                <div class="difficulty-indicator">
+                    Difficulty: <span id="difficultyIndicator">Easy</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Results Screen -->
+        <div id="resultsScreen" class="screen">
+            <div class="content results-content">
+                <h1 id="resultTitle">Quiz Complete!</h1>
+                <div class="results-stats">
+                    <div class="stat">
+                        <span class="label">Final Score</span>
+                        <span class="value" id="finalScore">0</span>
+                    </div>
+                    <div class="stat">
+                        <span class="label">Correct Answers</span>
+                        <span class="value" id="correctCount">0</span>
+                    </div>
+                    <div class="stat">
+                        <span class="label">Difficulty</span>
+                        <span class="value" id="finalDifficulty">Easy</span>
+                    </div>
+                </div>
+
+                <div class="name-input">
+                    <input type="text" id="playerName" placeholder="Enter your name..." maxlength="20">
+                    <button class="btn" onclick="saveScore()">Save & View Leaderboard</button>
+                </div>
+
+                <button class="btn btn-secondary" onclick="goHome()">← Back to Home</button>
+            </div>
+        </div>
+
+        <!-- Leaderboard Screen -->
+        <div id="leaderboardScreen" class="screen">
+            <div class="content leaderboard-content">
+                <h1>🏆 Leaderboard</h1>
+                
+                <div class="leaderboard-tabs">
+                    <button class="tab-btn active" onclick="switchLeaderboardTab('all')">All Time</button>
+                    <button class="tab-btn" onclick="switchLeaderboardTab('easy')">Easy</button>
+                    <button class="tab-btn" onclick="switchLeaderboardTab('medium')">Medium</button>
+                    <button class="tab-btn" onclick="switchLeaderboardTab('hard')">Hard</button>
+                </div>
+
+                <div id="leaderboardList" class="leaderboard-list">
+                    <!-- Generated dynamically -->
+                </div>
+
+                <button class="btn btn-secondary" onclick="goHome()">← Back to Home</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>
