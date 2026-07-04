@@ -3,126 +3,168 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Quiz Game - Test Your Knowledge</title>
-    <link rel="stylesheet" href="styles.css">
+    <title>Quiz Game - Choose Your Version</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 800px;
+            text-align: center;
+        }
+
+        h1 {
+            color: white;
+            margin-bottom: 10px;
+            font-size: 2.5em;
+        }
+
+        p {
+            color: rgba(255, 255, 255, 0.9);
+            margin-bottom: 40px;
+            font-size: 1.1em;
+        }
+
+        .version-selector {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-bottom: 20px;
+        }
+
+        .version-card {
+            background: white;
+            border-radius: 15px;
+            padding: 40px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
+            transition: all 0.3s ease;
+            text-decoration: none;
+            color: #333;
+        }
+
+        .version-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.3);
+        }
+
+        .version-card h2 {
+            margin-bottom: 15px;
+            color: #333;
+            font-size: 1.8em;
+        }
+
+        .emoji {
+            font-size: 3em;
+            margin-bottom: 10px;
+            display: block;
+        }
+
+        .version-card p {
+            color: #666;
+            margin-bottom: 20px;
+            line-height: 1.6;
+            text-align: left;
+        }
+
+        .features {
+            text-align: left;
+            margin: 20px 0;
+            font-size: 0.95em;
+            list-style: none;
+        }
+
+        .features li {
+            margin: 8px 0;
+            color: #666;
+        }
+
+        .btn {
+            display: inline-block;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 12px 30px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            border: none;
+            cursor: pointer;
+            font-size: 1em;
+            margin-top: 15px;
+        }
+
+        .btn:hover {
+            transform: scale(1.05);
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.2);
+        }
+
+        .btn-v2 {
+            background: linear-gradient(135deg, #1f8e2f 0%, #ffb81c 50%, #e03c31 100%);
+        }
+
+        @media (max-width: 600px) {
+            h1 {
+                font-size: 1.8em;
+            }
+
+            .version-card {
+                padding: 25px;
+            }
+
+            .emoji {
+                font-size: 2em;
+            }
+        }
+    </style>
 </head>
 <body>
     <div class="container">
-        <!-- Home Screen -->
-        <div id="homeScreen" class="screen active">
-            <div class="content">
-                <h1>🎮 Quiz Game</h1>
-                <p>Test your knowledge and climb the leaderboard!</p>
-                
-                <div class="difficulty-selector">
-                    <h2>Select Difficulty Level</h2>
-                    <button class="btn btn-difficulty" onclick="startQuiz('easy')">
-                        🟢 Easy
-                        <span class="info">10 seconds per question</span>
-                    </button>
-                    <button class="btn btn-difficulty" onclick="startQuiz('medium')">
-                        🟡 Medium
-                        <span class="info">7 seconds per question</span>
-                    </button>
-                    <button class="btn btn-difficulty" onclick="startQuiz('hard')">
-                        🔴 Hard
-                        <span class="info">5 seconds per question</span>
-                    </button>
-                </div>
+        <h1>🎮 Quiz Game Hub</h1>
+        <p>Choose your quiz adventure!</p>
 
-                <button class="btn btn-leaderboard" onclick="showLeaderboard()">
-                    🏆 View Leaderboard
-                </button>
-            </div>
-        </div>
-
-        <!-- Quiz Screen -->
-        <div id="quizScreen" class="screen">
-            <div class="quiz-header">
-                <div class="progress">
-                    <span id="questionNumber">1</span> / <span id="totalQuestions">10</span>
-                </div>
-                <div class="score-box">
-                    Score: <span id="currentScore">0</span>
-                </div>
-                <div class="timer" id="timer">10s</div>
+        <div class="version-selector">
+            <!-- Version 1 -->
+            <div class="version-card">
+                <span class="emoji">🌍</span>
+                <h2>Quiz Game V1</h2>
+                <p><strong>Classic General Knowledge</strong></p>
+                <ul class="features">
+                    <li>✅ General knowledge questions</li>
+                    <li>✅ 3 difficulty levels</li>
+                    <li>✅ Score tracking</li>
+                    <li>✅ Leaderboard system</li>
+                </ul>
+                <a href="index-old-v1.html" class="btn">Play V1</a>
             </div>
 
-            <div class="quiz-content">
-                <h2 id="questionText" class="question"></h2>
-
-                <!-- Multiple Choice Answers -->
-                <div id="multipleChoice" class="answers-container">
-                    <!-- Generated dynamically -->
-                </div>
-
-                <!-- True/False Buttons -->
-                <div id="trueFalse" class="answers-container" style="display: none;">
-                    <button class="btn btn-answer" onclick="answerQuestion(true)">✓ True</button>
-                    <button class="btn btn-answer" onclick="answerQuestion(false)">✗ False</button>
-                </div>
-
-                <!-- Text Input -->
-                <div id="textInput" class="answers-container" style="display: none;">
-                    <input type="text" id="textAnswer" placeholder="Type your answer..." onkeypress="handleTextInputKeypress(event)">
-                    <button class="btn" onclick="submitTextAnswer()">Submit Answer</button>
-                </div>
-
-                <div class="difficulty-indicator">
-                    Difficulty: <span id="difficultyIndicator">Easy</span>
-                </div>
-            </div>
-        </div>
-
-        <!-- Results Screen -->
-        <div id="resultsScreen" class="screen">
-            <div class="content results-content">
-                <h1 id="resultTitle">Quiz Complete!</h1>
-                <div class="results-stats">
-                    <div class="stat">
-                        <span class="label">Final Score</span>
-                        <span class="value" id="finalScore">0</span>
-                    </div>
-                    <div class="stat">
-                        <span class="label">Correct Answers</span>
-                        <span class="value" id="correctCount">0</span>
-                    </div>
-                    <div class="stat">
-                        <span class="label">Difficulty</span>
-                        <span class="value" id="finalDifficulty">Easy</span>
-                    </div>
-                </div>
-
-                <div class="name-input">
-                    <input type="text" id="playerName" placeholder="Enter your name..." maxlength="20">
-                    <button class="btn" onclick="saveScore()">Save & View Leaderboard</button>
-                </div>
-
-                <button class="btn btn-secondary" onclick="goHome()">← Back to Home</button>
-            </div>
-        </div>
-
-        <!-- Leaderboard Screen -->
-        <div id="leaderboardScreen" class="screen">
-            <div class="content leaderboard-content">
-                <h1>🏆 Leaderboard</h1>
-                
-                <div class="leaderboard-tabs">
-                    <button class="tab-btn active" onclick="switchLeaderboardTab('all')">All Time</button>
-                    <button class="tab-btn" onclick="switchLeaderboardTab('easy')">Easy</button>
-                    <button class="tab-btn" onclick="switchLeaderboardTab('medium')">Medium</button>
-                    <button class="tab-btn" onclick="switchLeaderboardTab('hard')">Hard</button>
-                </div>
-
-                <div id="leaderboardList" class="leaderboard-list">
-                    <!-- Generated dynamically -->
-                </div>
-
-                <button class="btn btn-secondary" onclick="goHome()">← Back to Home</button>
+            <!-- Version 2 -->
+            <div class="version-card">
+                <span class="emoji">🇿🇦</span>
+                <h2>Quiz Game V2</h2>
+                <p><strong>South African Trivia</strong></p>
+                <ul class="features">
+                    <li>✅ 4 SA categories</li>
+                    <li>✅ Culture, History, Food & Cars</li>
+                    <li>✅ 40+ SA questions</li>
+                    <li>✅ Category leaderboards</li>
+                </ul>
+                <a href="v2-index.html" class="btn btn-v2">Play V2</a>
             </div>
         </div>
     </div>
-
-    <script src="app.js"></script>
 </body>
 </html>
